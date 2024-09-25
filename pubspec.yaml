@@ -1,0 +1,48 @@
+name: softbol
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  hive: ^2.0.4  # Usa una versión compatible
+  hive_flutter: ^1.1.0  # Cambiar a una versión que sea compatible con Hive 2.0.4
+  path_provider: ^2.0.1
+  flutter_native_splash: ^2.0.5
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  hive_generator: ^1.1.0  # Cambiado a una versión que debería existir
+  build_runner: ^2.3.0
+
+
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/GigantesLogo.png
+    - assets/images/fondonegroo.png
+    - assets/images/fondonegromarcosnaranja.jpg
+    - assets/fonts/
+
+  fonts:
+    - family: GigantesFont
+      fonts:
+        - asset: assets/fonts/GigantesFont.ttf
+
+flutter_native_splash:
+  color: "#000000"
+  image: assets/images/GigantesLogo.png 
+  android: true
+  ios: true
+  web: false
+  android_gravity: center
