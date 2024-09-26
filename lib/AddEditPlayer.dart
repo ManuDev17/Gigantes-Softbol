@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:softbol/db/hive_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // Asegúrate de incluir esta línea
+//import 'package:softbol/db/firestore_database.dart';
 import 'package:softbol/models/player.dart';
 
 class AddEditPlayer extends StatefulWidget {
@@ -27,7 +28,6 @@ class _AddEditPlayerState extends State<AddEditPlayer> {
   @override
   void initState() {
     super.initState();
-    // Inicializa valores por defecto o los de un jugador existente
     _name = widget.player?.name ?? '';
     _number = widget.player?.number ?? 0;
     _hits = widget.player?.hits ?? 0;
@@ -46,10 +46,10 @@ class _AddEditPlayerState extends State<AddEditPlayer> {
       appBar: AppBar(
         title:
             Text(widget.player == null ? 'Añadir Jugador' : 'Editar Jugador'),
-        backgroundColor: Colors.black, // Fondo negro para el AppBar
+        backgroundColor: Colors.black,
       ),
       body: Container(
-        color: Colors.black, // Fondo negro para el cuerpo
+        color: Colors.black,
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
@@ -140,9 +140,13 @@ class _AddEditPlayerState extends State<AddEditPlayer> {
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
+
+                    // Calcula el promedio de bateo, evitando la división por cero
+                    double battingAverage =
+                        (_atBats > 0) ? _hits / _atBats : 0.0;
+
                     final player = Player(
-                      id: widget.player
-                          ?.id, // ID del jugador (puede ser nulo al añadir un nuevo jugador)
+                      id: widget.player?.id,
                       name: _name,
                       number: _number,
                       hits: _hits,
@@ -153,18 +157,37 @@ class _AddEditPlayerState extends State<AddEditPlayer> {
                       baseonballs: _baseonballs,
                       ponches: _ponches,
                       anotadas: _anotadas,
+                      battingAverage:
+                          battingAverage, // Agrega el promedio de bateo
                     );
 
+                    final playerData = {
+                      'name': player.name,
+                      'number': player.number,
+                      'hits': player.hits,
+                      'atBats': player.atBats,
+                      'homeRuns': player.homeRuns,
+                      'RBIs': player.RBIs,
+                      'stolenBases': player.stolenBases,
+                      'baseonballs': player.baseonballs,
+                      'ponches': player.ponches,
+                      'anotadas': player.anotadas,
+                      'battingAverage':
+                          player.battingAverage, // Agrega el promedio de bateo
+                    };
+
                     if (widget.player == null) {
-                      await HiveDatabase.instance.insertPlayer(player);
+                      await FirebaseFirestore.instance
+                          .collection('players')
+                          .add(playerData);
                     } else {
-                      await HiveDatabase.instance
-                          .updatePlayer(widget.player!.id!, player);
+                      await FirebaseFirestore.instance
+                          .collection('players')
+                          .doc(widget.player!.id)
+                          .update(playerData);
                     }
 
-                    // Regresa a la pantalla anterior
-                    Navigator.of(context).pop(
-                        true); // Usa 'pop' para volver a la pantalla anterior
+                    Navigator.of(context).pop(true);
                   }
                 },
                 child: const Text('Guardar'),
@@ -181,9 +204,8 @@ class _AddEditPlayerState extends State<AddEditPlayer> {
     return TextFormField(
       initialValue: initialValue,
       decoration: InputDecoration(
-          labelText: label,
-          labelStyle: TextStyle(color: Colors.white)), // Color del texto
-      style: TextStyle(color: Colors.white), // Color del texto del campo
+          labelText: label, labelStyle: TextStyle(color: Colors.white)),
+      style: TextStyle(color: Colors.white),
       validator: validator,
       onSaved: onSaved,
     );
@@ -194,9 +216,8 @@ class _AddEditPlayerState extends State<AddEditPlayer> {
     return TextFormField(
       initialValue: initialValue.toString(),
       decoration: InputDecoration(
-          labelText: label,
-          labelStyle: TextStyle(color: Colors.white)), // Color del texto
-      style: TextStyle(color: Colors.white), // Color del texto del campo
+          labelText: label, labelStyle: TextStyle(color: Colors.white)),
+      style: TextStyle(color: Colors.white),
       keyboardType: TextInputType.number,
       validator: validator,
       onSaved: onSaved,

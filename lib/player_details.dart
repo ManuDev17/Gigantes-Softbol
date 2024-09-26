@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:softbol/models/player.dart';
-import 'package:softbol/db/hive_database.dart';
+import 'package:softbol/db/firestore_database.dart';
 
 class PlayerDetails extends StatefulWidget {
   final Player player;
@@ -76,12 +76,15 @@ class _PlayerDetailsState extends State<PlayerDetails> {
       ponches: int.tryParse(ponchesController.text) ?? widget.player.ponches,
       anotadas: int.tryParse(anotadasController.text) ??
           widget.player.anotadas, // Cambié ponches a anotadas
+      battingAverage:
+          widget.player.battingAverage, // Asegúrate de incluir este campo
     );
 
     // Asegúrate de que widget.player.id es no nulo
     if (widget.player.id != null) {
-      await HiveDatabase.instance
-          .updatePlayer(widget.player.id!, updatedPlayer);
+      await FirestoreDatabase.instance.updatePlayer(
+          int.tryParse(widget.player.id!)!,
+          updatedPlayer); // Cambié el tipo a int
     } else {
       // Maneja el caso de que id sea nulo
       print('Error: el id es nulo, no se puede actualizar el jugador.');

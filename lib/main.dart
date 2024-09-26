@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart'; // Importa Hive para Flutter
-import 'package:softbol/models/player.dart';
+import 'package:firebase_core/firebase_core.dart'; // Importa Firebase
+import 'firebase_options.dart'; // Archivo auto-generado de Firebase
 import 'home_page.dart';
 import 'calendar_page.dart';
 import 'standings_page.dart';
 
 void main() async {
-  await Hive.initFlutter();
-  Hive.registerAdapter(PlayerAdapter()); // Registra el adaptador aquí
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Asegura la inicialización de Firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions
+        .currentPlatform, // Inicializa Firebase con las opciones de plataforma
+  );
   runApp(SoftballStatsApp());
 }
 
@@ -20,11 +24,11 @@ class SoftballStatsApp extends StatelessWidget {
         fontFamily: 'GigantesFont',
         primaryColor: Colors.black,
         scaffoldBackgroundColor: Colors.transparent,
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           bodyLarge: TextStyle(color: Colors.white),
           bodyMedium: TextStyle(color: Colors.white),
         ),
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           color: Colors.black,
           titleTextStyle: TextStyle(
             color: Colors.white,
@@ -32,7 +36,7 @@ class SoftballStatsApp extends StatelessWidget {
             fontFamily: 'GigantesFont',
           ),
         ),
-        buttonTheme: ButtonThemeData(
+        buttonTheme: const ButtonThemeData(
           buttonColor: Colors.orange,
           textTheme: ButtonTextTheme.primary,
         ),
@@ -43,7 +47,6 @@ class SoftballStatsApp extends StatelessWidget {
           ),
         ),
       ),
-      // Definir las rutas
       initialRoute: '/home',
       routes: {
         '/home': (context) => HomePage(),

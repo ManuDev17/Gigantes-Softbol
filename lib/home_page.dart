@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:softbol/calendar_page.dart';
-import 'package:softbol/standings_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // Importa Firestore
+//import 'package:softbol/calendar_page.dart';
+//import 'package:softbol/standings_page.dart';
 import 'package:softbol/models/player.dart';
-import 'package:softbol/db/hive_database.dart';
 import 'addeditplayer.dart'; // Pantalla para agregar/editar jugadores
 
 class HomePage extends StatefulWidget {
@@ -20,18 +20,32 @@ class _HomePageState extends State<HomePage> {
     _refreshPlayers();
   }
 
+  // Cargar jugadores desde Firestore
+  Future<List<Player>> _fetchPlayers() async {
+    final QuerySnapshot snapshot =
+        await FirebaseFirestore.instance.collection('players').get();
+    return snapshot.docs.map((doc) => Player.fromFirestore(doc)).toList();
+  }
+
   void _refreshPlayers() {
     setState(() {
-      _players = HiveDatabase.instance.getPlayers();
+      _players = _fetchPlayers(); // Actualiza la lista de jugadores
     });
   }
 
-  Future<void> _deletePlayer(Player player) async {
+  Future<void> _deletePlayer(String? playerId) async {
+    if (playerId == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: El ID del jugador es nulo.')),
+      );
+      return; // Sal de la función si el ID es nulo
+    }
+
     final bool? confirmDelete = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Eliminar Jugador'),
-        content: Text('¿Estás seguro de que deseas eliminar a ${player.name}?'),
+        content: Text('¿Estás seguro de que deseas eliminar a este jugador?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false), // Cancelar
@@ -46,38 +60,14 @@ class _HomePageState extends State<HomePage> {
     );
 
     if (confirmDelete == true) {
-      await HiveDatabase.instance.deletePlayer(player.id!);
+      await FirebaseFirestore.instance
+          .collection('players')
+          .doc(playerId)
+          .delete();
       _refreshPlayers();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Jugador ${player.name} eliminado')),
+        SnackBar(content: Text('Jugador eliminado')),
       );
-    }
-  }
-
-  void _onItemTapped(int index) {
-    if (index != _selectedIndex) {
-      setState(() {
-        _selectedIndex = index;
-      });
-
-      // Navegar a las diferentes pantallas según el índice
-      if (_selectedIndex == 0) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage()), // Volver a Home
-        );
-      } else if (_selectedIndex == 1) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => CalendarPage()), // Calendario
-        );
-      } else if (_selectedIndex == 2) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => StandingsPage()), // Tabla de posiciones
-        );
-      }
     }
   }
 
@@ -137,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       confirmDismiss: (direction) async {
                         if (direction == DismissDirection.startToEnd) {
-                          await _deletePlayer(player);
+                          await _deletePlayer(player.id);
                           return false;
                         } else if (direction == DismissDirection.endToStart) {
                           final result = await Navigator.push(
@@ -224,39 +214,41 @@ class _HomePageState extends State<HomePage> {
         child: Icon(Icons.add),
       ),
       bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.black,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.white70,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today),
-              label: 'Calendario',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.list),
-              label: 'Posiciones',
-            ),
-          ],
-          currentIndex: 0, // Índice del Home
-          onTap: (int index) {
-            switch (index) {
-              case 0:
-                break; // Ya estás en el Home
-              case 1:
-                Navigator.popAndPushNamed(
-                    context, '/calendar'); // Regresar a la página principal
-                break;
+        backgroundColor: Colors.black,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white70,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today),
+            label: 'Calendario',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'Posiciones',
+          ),
+        ],
+        currentIndex: _selectedIndex, // Usa el índice seleccionado
+        onTap: (int index) {
+          if (index != _selectedIndex) {
+            setState(() {
+              _selectedIndex = index;
+            });
 
-              case 2:
-                Navigator.popAndPushNamed(
-                    context, '/standings'); // Ir a la tabla de posiciones
-                break;
+            // Navegar a las diferentes pantallas según el índice
+            if (_selectedIndex == 1) {
+              Navigator.popAndPushNamed(
+                  context, '/calendar'); // Ir a Calendario
+            } else if (_selectedIndex == 2) {
+              Navigator.popAndPushNamed(
+                  context, '/standings'); // Ir a Posiciones
             }
-          }),
+          }
+        },
+      ),
     );
   }
 }

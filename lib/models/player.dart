@@ -1,62 +1,86 @@
-import 'package:hive/hive.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-part 'player.g.dart';
-
-@HiveType(typeId: 0) // Asignamos un id único para la clase Player
-class Player extends HiveObject {
-  @HiveField(0)
-  int?
-      id; // El id es nullable, lo que permite que sea null para nuevos jugadores
-
-  @HiveField(1)
-  String name;
-
-  @HiveField(2)
-  int number; // Número del jugador
-
-  @HiveField(3)
-  int hits;
-
-  @HiveField(4)
-  int atBats;
-
-  @HiveField(5)
-  int homeRuns;
-
-  @HiveField(6)
-  int RBIs;
-
-  @HiveField(7)
-  int stolenBases;
-
-  @HiveField(8)
-  int baseonballs;
-
-  @HiveField(9)
-  int ponches;
-
-  @HiveField(10)
-  int anotadas;
+class Player {
+  final String? id;
+  final String name;
+  final int number;
+  final int hits;
+  final double battingAverage;
+  final int homeRuns;
+  final int RBIs;
+  final int stolenBases;
+  final int baseonballs;
+  final int atBats;
+  final int ponches;
+  final int anotadas;
 
   Player({
-    this.id, // El id ahora es opcional para jugadores nuevos
+    this.id,
     required this.name,
     required this.number,
     required this.hits,
-    required this.atBats,
+    required this.battingAverage,
     required this.homeRuns,
     required this.RBIs,
     required this.stolenBases,
     required this.baseonballs,
+    required this.atBats,
     required this.ponches,
     required this.anotadas,
   });
 
-  // Getter para el average de bateo
-  double get battingAverage {
-    if (atBats == 0) {
-      return 0;
-    }
-    return hits / atBats;
+  // Método para crear un Player a partir de un documento Firestore
+  factory Player.fromFirestore(DocumentSnapshot doc) {
+    Map data = doc.data() as Map<String, dynamic>;
+
+    return Player(
+      id: doc.id,
+      name: data['name'] ?? '',
+      number: data['number'] ?? 0,
+      hits: data['hits'] ?? 0,
+      battingAverage: (data['battingAverage'] ?? 0.0).toDouble(),
+      homeRuns: data['homeRuns'] ?? 0,
+      RBIs: data['RBIs'] ?? 0,
+      stolenBases: data['stolenBases'] ?? 0,
+      baseonballs: data['baseonballs'] ?? 0,
+      atBats: data['atBats'] ?? 0,
+      ponches: data['ponches'] ?? 0,
+      anotadas: data['anotadas'] ?? 0,
+    );
+  }
+
+  // Método para convertir un Player a Map
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'number': number,
+      'hits': hits,
+      'battingAverage': battingAverage,
+      'homeRuns': homeRuns,
+      'RBIs': RBIs,
+      'stolenBases': stolenBases,
+      'baseonballs': baseonballs,
+      'atBats': atBats,
+      'ponches': ponches,
+      'anotadas': anotadas,
+    };
+  }
+
+  // Método para crear un Player a partir de un Map y un ID
+  factory Player.fromMap(Map<String, dynamic> data, String id) {
+    return Player(
+      id: id,
+      name: data['name'] ?? '',
+      number: data['number'] ?? 0,
+      hits: data['hits'] ?? 0,
+      battingAverage: (data['battingAverage'] ?? 0.0).toDouble(),
+      homeRuns: data['homeRuns'] ?? 0,
+      RBIs: data['RBIs'] ?? 0,
+      stolenBases: data['stolenBases'] ?? 0,
+      baseonballs: data['baseonballs'] ?? 0,
+      atBats: data['atBats'] ?? 0,
+      ponches: data['ponches'] ?? 0,
+      anotadas: data['anotadas'] ?? 0,
+    );
   }
 }

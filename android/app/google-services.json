@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "227007992756",
+    "project_id": "gigantes-softbol",
+    "storage_bucket": "gigantes-softbol.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227007992756:android:4ccb4fd064ddad2e68d8e1",
+        "android_client_info": {
+          "package_name": "com.gigantesmvd.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqqCTh0141LS7CTnJaCxCCAJ60e6lFxyQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,25 +5,22 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.5.0
+  sdk: ">=2.17.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  hive: ^2.0.4  # Usa una versión compatible
-  hive_flutter: ^1.1.0  # Cambiar a una versión que sea compatible con Hive 2.0.4
-  path_provider: ^2.0.1
-  flutter_native_splash: ^2.0.5
-  cupertino_icons: ^1.0.8
+  firebase_core: ^3.5.0  # Actualizado a la versión compatible con Cloud Firestore
+  cloud_firestore: ^5.4.2  # Actualizado para ser compatible con firebase_core
+  path_provider: ^2.0.1  # Para el manejo de rutas
+  flutter_native_splash: ^2.0.5  # Para el splash screen
+  cupertino_icons: ^1.0.8  # Iconos para iOS
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
-  hive_generator: ^1.1.0  # Cambiado a una versión que debería existir
-  build_runner: ^2.3.0
-
-
+  build_runner: ^2.3.0  # Para generar adaptadores
 
 flutter:
   uses-material-design: true
@@ -41,7 +38,7 @@ flutter:
 
 flutter_native_splash:
   color: "#000000"
-  image: assets/images/GigantesLogo.png 
+  image: assets/images/GigantesLogo.png
   android: true
   ios: true
   web: false
