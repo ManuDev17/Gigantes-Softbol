@@ -1,1 +1,33 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"gigantes-softbol","appId":"1:227007992756:android:4ccb4fd064ddad2e68d8e1","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"gigantes-softbol","configurations":{"android":"1:227007992756:android:4ccb4fd064ddad2e68d8e1","ios":"1:227007992756:ios:cafe39d2eb0a999868d8e1","macos":"1:227007992756:ios:cafe39d2eb0a999868d8e1","web":"1:227007992756:web:14f5837abac70b4568d8e1","windows":"1:227007992756:web:f0da8f6619eb1f1168d8e1"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "gigantes-softbol",
+          "appId": "1:227007992756:android:4ccb4fd064ddad2e68d8e1",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "gigantes-softbol",
+          "configurations": {
+            "android": "1:227007992756:android:4ccb4fd064ddad2e68d8e1",
+            "ios": "1:227007992756:ios:cafe39d2eb0a999868d8e1",
+            "macos": "1:227007992756:ios:cafe39d2eb0a999868d8e1",
+            "web": "1:227007992756:web:14f5837abac70b4568d8e1",
+            "windows": "1:227007992756:web:f0da8f6619eb1f1168d8e1"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
