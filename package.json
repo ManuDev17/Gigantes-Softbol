@@ -1,0 +1,16 @@
+{
+  "name": "softbol",
+  "version": "1.0.0",
+  "description": "Una aplicación para gestionar y visualizar estadísticas de jugadores de softbol desarrollada con Flutter.",
+  "main": "flutter.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
