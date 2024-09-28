@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart'; // Asegúrate de incluir esta línea
+import 'package:cloud_firestore/cloud_firestore.dart'; //
 //import 'package:softbol/db/firestore_database.dart';
 import 'package:softbol/models/player.dart';
 
@@ -145,6 +145,7 @@ class _AddEditPlayerState extends State<AddEditPlayer> {
                     double battingAverage =
                         (_atBats > 0) ? _hits / _atBats : 0.0;
 
+                    // Crea el objeto jugador con los datos ingresados
                     final player = Player(
                       id: widget.player?.id,
                       name: _name,
@@ -161,6 +162,7 @@ class _AddEditPlayerState extends State<AddEditPlayer> {
                           battingAverage, // Agrega el promedio de bateo
                     );
 
+                    // Convierte los datos a un formato adecuado para Firestore
                     final playerData = {
                       'name': player.name,
                       'number': player.number,
@@ -176,22 +178,33 @@ class _AddEditPlayerState extends State<AddEditPlayer> {
                           player.battingAverage, // Agrega el promedio de bateo
                     };
 
-                    if (widget.player == null) {
-                      await FirebaseFirestore.instance
-                          .collection('players')
-                          .add(playerData);
-                    } else {
-                      await FirebaseFirestore.instance
-                          .collection('players')
-                          .doc(widget.player!.id)
-                          .update(playerData);
-                    }
+                    // Verifica si es una actualización o una creación nueva
+                    try {
+                      if (widget.player == null) {
+                        await FirebaseFirestore.instance
+                            .collection('players')
+                            .add(playerData); // Agrega un nuevo jugador
+                      } else {
+                        await FirebaseFirestore.instance
+                            .collection('players')
+                            .doc(widget.player!.id)
+                            .update(
+                                playerData); // Actualiza el jugador existente
+                      }
 
-                    Navigator.of(context).pop(true);
+                      // Regresa a la pantalla anterior al guardar exitosamente
+                      Navigator.of(context).pop(true);
+                    } catch (e) {
+                      // Si hay algún error, imprime el error y muestra un mensaje
+                      print("Error al guardar jugador: $e");
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Error al guardar jugador: $e')),
+                      );
+                    }
                   }
                 },
                 child: const Text('Guardar'),
-              ),
+              )
             ],
           ),
         ),

@@ -6,11 +6,9 @@ import 'calendar_page.dart';
 import 'standings_page.dart';
 
 void main() async {
-  WidgetsFlutterBinding
-      .ensureInitialized(); // Asegura la inicialización de Firebase
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions
-        .currentPlatform, // Inicializa Firebase con las opciones de plataforma
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(SoftballStatsApp());
 }
