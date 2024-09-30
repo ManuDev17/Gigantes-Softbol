@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // Importa Firestore
-//import 'package:softbol/calendar_page.dart';
-//import 'package:softbol/standings_page.dart';
 import 'package:softbol/models/player.dart';
 import 'addeditplayer.dart'; // Pantalla para agregar/editar jugadores
 
@@ -13,6 +11,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late Future<List<Player>> _players;
   int _selectedIndex = 0; // Para controlar el BottomNavigationBar
+  final String correctPassword = "0953"; // Define la contraseña aquí
 
   @override
   void initState() {
@@ -38,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: El ID del jugador es nulo.')),
       );
-      return; // Sal de la función si el ID es nulo
+      return;
     }
 
     final bool? confirmDelete = await showDialog<bool>(
@@ -69,6 +68,61 @@ class _HomePageState extends State<HomePage> {
         SnackBar(content: Text('Jugador eliminado')),
       );
     }
+  }
+
+  Future<bool> _showPasswordDialog(BuildContext context) async {
+    final _passwordController = TextEditingController();
+    bool _isPasswordVisible = false;
+
+    final bool? passwordAccepted = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: Text('Ingrese la contraseña'),
+              content: TextField(
+                controller: _passwordController,
+                obscureText: !_isPasswordVisible,
+                decoration: InputDecoration(
+                  labelText: 'Contraseña',
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isPasswordVisible = !_isPasswordVisible;
+                      });
+                    },
+                  ),
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: Text('Cancelar'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    if (_passwordController.text == correctPassword) {
+                      Navigator.of(context).pop(true); // Contraseña correcta
+                    } else {
+                      Navigator.of(context).pop(false); // Contraseña incorrecta
+                    }
+                  },
+                  child: Text('Aceptar'),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+
+    return passwordAccepted ?? false;
   }
 
   @override
@@ -126,10 +180,22 @@ class _HomePageState extends State<HomePage> {
                         child: Icon(Icons.edit, color: Colors.white),
                       ),
                       confirmDismiss: (direction) async {
+                        bool passwordCorrect =
+                            await _showPasswordDialog(context);
+
+                        if (!passwordCorrect) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Contraseña incorrecta')),
+                          );
+                          return false;
+                        }
+
                         if (direction == DismissDirection.startToEnd) {
+                          // Eliminar jugador
                           await _deletePlayer(player.id);
                           return false;
                         } else if (direction == DismissDirection.endToStart) {
+                          // Editar jugador
                           final result = await Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -201,14 +267,22 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final result = await Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AddEditPlayer(),
-            ),
-          );
-          if (result == true) {
-            _refreshPlayers(); // Refresca la lista de jugadores
+          bool passwordCorrect = await _showPasswordDialog(context);
+
+          if (passwordCorrect) {
+            final result = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AddEditPlayer(),
+              ),
+            );
+            if (result == true) {
+              _refreshPlayers(); // Refresca la lista de jugadores
+            }
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Contraseña incorrecta')),
+            );
           }
         },
         child: Icon(Icons.add),
