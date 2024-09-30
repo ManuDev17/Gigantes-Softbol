@@ -22,16 +22,21 @@ jobs:
         with:
           flutter-version: '3.0.0' # Cambia por la versión que estés usando
 
-      # 3. Install npm dependencies (you can skip if not needed)
-      - name: Install npm dependencies
-        run: npm ci
+      # 3. Get Flutter dependencies
+      - name: Get Flutter dependencies
+        run: flutter pub get
 
       # 4. Build the Flutter web app
       - name: Build Flutter web app
         run: flutter build web
 
-      # 5. Deploy to Firebase Hosting
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      # 5. Install npm dependencies (if you have a package.json file)
+      - name: Install npm dependencies
+        run: npm ci
+
+      # 6. Deploy to Firebase Hosting
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GIGANTES_SOFTBOL }}
