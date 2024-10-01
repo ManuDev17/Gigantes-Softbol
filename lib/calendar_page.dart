@@ -68,7 +68,7 @@ class CalendarPage extends StatelessWidget {
                   '4to inning': '0 carreras ambos',
                   '5to inning': '0 carreras ambos',
                   '6to inning': '0 carreras ambos',
-                  '7mo inning': '0 carreras Pa Goza, 1 carrera Gigantes',
+                  '7mo inning': '7 carreras Pa Goza, 1 carrera Gigantes',
                 },
               ),
               _buildMatch(
