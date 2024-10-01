@@ -24,6 +24,9 @@ class _PlayerDetailsState extends State<PlayerDetails> {
   late TextEditingController ponchesController;
   late TextEditingController anotadasController;
 
+  // Instancia de FirestoreDatabase
+  final FirestoreDatabase firestoreDatabase = FirestoreDatabase();
+
   @override
   void initState() {
     super.initState();
@@ -62,11 +65,9 @@ class _PlayerDetailsState extends State<PlayerDetails> {
     final updatedPlayer = Player(
       id: widget.player.id,
       name: nameController.text,
-      number: widget.player
-          .number, // El número no está editado aquí, pero puede estar si lo deseas
+      number: widget.player.number, // El número no está editado aquí
       hits: int.tryParse(hitsController.text) ?? widget.player.hits,
-      atBats: widget
-          .player.atBats, // Si deseas editar atBats, también agrégalo aquí
+      atBats: widget.player.atBats, // Puedes agregar atBats si lo deseas
       homeRuns: int.tryParse(homeRunsController.text) ?? widget.player.homeRuns,
       RBIs: int.tryParse(rbisController.text) ?? widget.player.RBIs,
       stolenBases:
@@ -74,20 +75,16 @@ class _PlayerDetailsState extends State<PlayerDetails> {
       baseonballs:
           int.tryParse(baseonballsController.text) ?? widget.player.baseonballs,
       ponches: int.tryParse(ponchesController.text) ?? widget.player.ponches,
-      anotadas: int.tryParse(anotadasController.text) ??
-          widget.player.anotadas, // Cambié ponches a anotadas
-      battingAverage:
-          widget.player.battingAverage, // Asegúrate de incluir este campo
+      anotadas: int.tryParse(anotadasController.text) ?? widget.player.anotadas,
+      battingAverage: widget.player.battingAverage, // Incluye este campo
     );
 
-    // Asegúrate de que widget.player.id es no nulo
+    // Asegúrate de que el ID del jugador no sea nulo
     if (widget.player.id != null) {
-      await FirestoreDatabase.instance.updatePlayer(
-          int.tryParse(widget.player.id!)!,
-          updatedPlayer); // Cambié el tipo a int
+      await firestoreDatabase.updatePlayer(widget.player.id!, updatedPlayer);
     } else {
-      // Maneja el caso de que id sea nulo
-      print('Error: el id es nulo, no se puede actualizar el jugador.');
+      // Maneja el caso de que el ID sea nulo
+      print('Error: el ID es nulo, no se puede actualizar el jugador.');
     }
 
     Navigator.pop(context); // Regresa a la pantalla anterior después de guardar
@@ -128,7 +125,7 @@ class _PlayerDetailsState extends State<PlayerDetails> {
               TextFormField(
                 controller: rbisController,
                 decoration:
-                    InputDecoration(labelText: 'RBIs Carreras Impulsadas'),
+                    InputDecoration(labelText: 'RBIs (Carreras Impulsadas)'),
                 keyboardType: TextInputType.number,
               ),
               TextFormField(

@@ -38,28 +38,27 @@ class StandingsPage extends StatelessWidget {
                   SizedBox(height: 10),
                   // Filas de equipos
                   _buildTeamRow(
-                      'Repecho', 2, 2, 0, 32, 13, 19, 0.0, 1.000, 16, 6.5),
+                      'Repecho', 3, 3, 0, 38, 18, 20, 0.0, 1.000, 12.6, 6),
                   SizedBox(height: 8),
                   _buildTeamRow(
-                      'Carboneros', 2, 2, 0, 19, 3, 16, 0.0, 1.000, 9.5, 1.5),
+                      'Carboneros', 3, 3, 0, 27, 8, 19, 0.0, 1.000, 9, 2.6),
                   SizedBox(height: 8),
                   _buildTeamRow(
-                      'Vegueros', 2, 2, 0, 24, 15, 9, 0.0, 1.000, 12, 7.5),
+                      'Vegueros', 3, 2, 1, 22, 15, 7, 0.0, 0.667, 7.3, 5),
                   SizedBox(height: 8),
                   _buildTeamRow(
-                      'Cuba Libre', 2, 1, 1, 14, 10, 4, 1.0, 0.500, 7, 5),
+                      'Cuba Libre', 3, 2, 1, 30, 15, 15, 1.0, 0.667, 10, 5),
                   SizedBox(height: 8),
                   _buildTeamRow(
-                      'Pa Goza', 2, 1, 1, 18, 17, 1, 1.0, 0.500, 9, 8.5),
+                      'Pa Goza', 3, 2, 1, 31, 22, 9, 1.0, 0.667, 10.3, 7.3),
+                  SizedBox(height: 8),
+                  _buildTeamRow('Mets', 3, 0, 3, 12, 39, -27, 3.0, 0.0, 4, 13),
                   SizedBox(height: 8),
                   _buildTeamRow(
-                      'Mets', 2, 0, 2, 15, 30, -15, 2.0, 0.0, 7.5, 15),
+                      'Cerveceros', 3, 0, 3, 6, 22, -16, 3.0, 0.0, 2, 7.3),
                   SizedBox(height: 8),
                   _buildTeamRow(
-                      'Cerveceros', 2, 0, 2, 1, 16, -15, 2.0, 0.0, 0.5, 8),
-                  SizedBox(height: 8),
-                  _buildTeamRow(
-                      'Gigantes', 2, 0, 2, 13, 32, -19, 2.0, 0.0, 6.5, 16),
+                      'Gigantes', 3, 0, 3, 18, 45, -27, 3.0, 0.0, 6, 15),
                   SizedBox(
                       height:
                           16), // Añadir espacio extra después del último equipo
