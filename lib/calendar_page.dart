@@ -62,7 +62,7 @@ class CalendarPage extends StatelessWidget {
                 '22 de septiembre, 9.45am, Estadio Colón',
                 'Resultado Pa Goza 12 - Gigantes 5 , Gigantes fue local',
                 {
-                  '1er inning': '6 carreras Pa Goza, 1 carrera Gigantes',
+                  '1er inning': '5 carreras Pa Goza, 1 carrera Gigantes',
                   '2do inning': '0 carreras Pa Goza, 2 carreras Gigantes',
                   '3er inning': '0 carreras Pa Goza, 1 carrera Gigantes',
                   '4to inning': '0 carreras ambos',
