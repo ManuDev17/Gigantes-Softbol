@@ -75,9 +75,19 @@ class CalendarPage extends StatelessWidget {
                 '29 de septiembre',
                 'Jornada Libre',
               ),
-              _buildMatch(
-                'Cerveceros Vs Gigantes de Montevideo',
-                '6 de octubre, 12.00pm, Estadio Nuevo Parque Rivera',
+              _buildMatchWithBoxScore(
+                'Gigantes de Montevideo Vs Cerveceros',
+                '6 de octubre, 12:00 pm, Estadio Nuevo Parque Rivera',
+                'Resultado Gigantes 9 - Cerveceros 14 , Gigantes fue visitante',
+                {
+                  '1er inning': '2 carreras ambos',
+                  '2do inning': '0 carreras ambos',
+                  '3er inning': '0 carreras Gigantes, 5 carreras Cerveceros',
+                  '4to inning': '1 carrera Gigantes, 3 carreras Cerveceros',
+                  '5to inning': '4 carreras Gigantes, 0 carreras Cerveceros',
+                  '6to inning': '2 carreras Gigantes, 4 carreras Cerveceros',
+                  '7mo inning': '0 carreras Gigantes',
+                },
               ),
               _buildMatch(
                 'Gigantes de Montevideo Vs Vegueros',
