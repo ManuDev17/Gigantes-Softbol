@@ -92,7 +92,7 @@ class CalendarPage extends StatelessWidget {
               _buildMatchWithBoxScore(
                 'Vegueros vs Gigantes de Montevideo',
                 '13 de octubre, 9:45 am, Estadio Charrua',
-                'Resultado Gigantes 13 - Cerveceros 17 , Gigantes fue local',
+                'Resultado Gigantes 13 - Vegueros 17 , Gigantes fue local',
                 {
                   '1er inning': '3 carreras Vegueros, 4 carreras Gigantes',
                   '2do inning': '4 carreras Vegueros, 5 carreras Gigantes',
