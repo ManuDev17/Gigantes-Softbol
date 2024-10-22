@@ -104,9 +104,16 @@ class CalendarPage extends StatelessWidget {
                   '8vo inning': '5 carreras Vegueros, 2 carreras Gigantes',
                 },
               ),
-              _buildMatch(
+              _buildMatchWithBoxScore(
                 'Mets Vs Gigantes de Montevideo',
                 '20 de octubre, 12.00pm, Estadio Nuevo Parque Rivera',
+                'Resultado Mets 12 - Gigantes 16 , Gigantes fue local',
+                {
+                  '1er inning': '5 carreras Mets, 4 carreras Gigantes',
+                  '2do inning': '5 carreras Mets, 0 carreras Gigantes',
+                  '3er inning': '1 carrera Mets, 2 carreras Gigantes',
+                  '4to inning': '1 carrera Mets, 10 carreras Gigantes',
+                },
               ),
               _buildMatch(
                 'Gigantes de Montevideo Vs Cuba Libre',
