@@ -38,28 +38,28 @@ class StandingsPage extends StatelessWidget {
                   SizedBox(height: 10),
                   // Filas de equipos
                   _buildTeamRow(
-                      'Repecho', 6, 6, 0, 65, 27, 38, 0.0, 1.000, 10.8, 4.5),
+                      'Carboneros', 7, 6, 1, 62, 23, 39, 0.0, .857, 8.8, 3.2),
                   SizedBox(height: 8),
                   _buildTeamRow(
-                      'Pa Goza', 6, 5, 1, 61, 32, 29, 1.0, 0.833, 10.1, 5.3),
+                      'Repecho', 7, 6, 1, 70, 33, 37, 0.0, 0.857, 10, 4.7),
                   SizedBox(height: 8),
                   _buildTeamRow(
-                      'Carboneros', 6, 5, 1, 57, 19, 38, 1.0, 0.833, 9.5, 3.1),
+                      'Pa Goza', 7, 6, 1, 68, 32, 36, 0.0, 0.857, 9.7, 4.5),
                   SizedBox(height: 8),
                   _buildTeamRow(
-                      'Vegueros', 6, 3, 3, 50, 46, 4, 3.0, 0.500, 8.3, 7.6),
-                  SizedBox(height: 8),
-                  _buildTeamRow('Cuba Libre', 6, 2, 4, 40, 64, -24, 4.0, 0.333,
-                      6.6, 10.6),
+                      'Cerveceros', 7, 3, 4, 39, 40, -1, 3.0, 0.429, 5.5, 5.7),
                   SizedBox(height: 8),
                   _buildTeamRow(
-                      'Cerveceros', 6, 2, 4, 32, 40, -8, 4.0, 0.333, 5.3, 6.6),
+                      'Vegueros', 7, 3, 4, 50, 53, -3, 3.0, 0.429, 7.1, 7.5),
+                  SizedBox(height: 8),
+                  _buildTeamRow('Cuba Libre', 7, 2, 5, 54, 80, -26, 4.0, 0.286,
+                      7.7, 11.4),
                   SizedBox(height: 8),
                   _buildTeamRow(
-                      'Mets', 6, 1, 5, 19, 53, -34, 5.0, 0.167, 3.1, 8.8),
+                      'Mets', 7, 1, 6, 19, 60, -41, 5.0, 0.143, 2.7, 8.5),
                   SizedBox(height: 8),
                   _buildTeamRow(
-                      'Gigantes', 6, 0, 6, 40, 83, -43, 6.0, 0.0, 6.6, 13.8),
+                      'Gigantes', 7, 1, 6, 55, 96, -41, 5.0, 0.143, 7.8, 13.7),
                   SizedBox(
                       height:
                           16), // Añadir espacio extra después del último equipo

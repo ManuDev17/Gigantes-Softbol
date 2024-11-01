@@ -115,9 +115,19 @@ class CalendarPage extends StatelessWidget {
                   '4to inning': '1 carrera Mets, 10 carreras Gigantes',
                 },
               ),
-              _buildMatch(
+              _buildMatchWithBoxScore(
                 'Gigantes de Montevideo Vs Cuba Libre',
                 '27 de octubre, 9.45am, Estadio Colon',
+                'Resultado Gigantes 19 - Cuba Libre 13 , Gigantes fue visitante',
+                {
+                  '1er inning': '4 carreras Gigantes, 10 carreras Cuba Libre',
+                  '2do inning': '0 carreras ambos',
+                  '3er inning': '8 carreras Gigantes, 0 carreras Cuba Libre',
+                  '4to inning': '1 carrera Gigantes, 3 carreras Cuba Libre',
+                  '5to inning': '3 carreras Gigantes, 0 carreras Cuba Libre',
+                  '6to inning': '1 carrera Gigantes, 0 carreras Cuba Libre',
+                  '7mo inning': '2 carreras Gigantes, 0 carreras Cuba Libre',
+                },
               ),
               _buildMatch(
                 '3 de noviembre',
