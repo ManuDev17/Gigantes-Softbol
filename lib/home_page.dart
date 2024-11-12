@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // Importa Firestore
 import 'package:softbol/models/player.dart';
 import 'addeditplayer.dart'; // Pantalla para agregar/editar jugadores
+import 'pitching_stats.dart'; // Nueva pantalla para estadísticas de pitcheo
 
 class HomePage extends StatefulWidget {
   @override
@@ -138,6 +139,18 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.bar_chart),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PitchingStatsPage()),
+              );
+            },
+            tooltip: 'Ver estadísticas de pitcheo',
+          ),
+        ],
       ),
       body: Stack(
         children: [
@@ -305,22 +318,11 @@ class _HomePageState extends State<HomePage> {
             label: 'Posiciones',
           ),
         ],
-        currentIndex: _selectedIndex, // Usa el índice seleccionado
+        currentIndex: _selectedIndex,
         onTap: (int index) {
-          if (index != _selectedIndex) {
-            setState(() {
-              _selectedIndex = index;
-            });
-
-            // Navegar a las diferentes pantallas según el índice
-            if (_selectedIndex == 1) {
-              Navigator.popAndPushNamed(
-                  context, '/calendar'); // Ir a Calendario
-            } else if (_selectedIndex == 2) {
-              Navigator.popAndPushNamed(
-                  context, '/standings'); // Ir a Posiciones
-            }
-          }
+          setState(() {
+            _selectedIndex = index; // Cambia el índice seleccionado
+          });
         },
       ),
     );
