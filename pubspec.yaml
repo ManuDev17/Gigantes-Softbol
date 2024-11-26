@@ -15,6 +15,7 @@ dependencies:
   path_provider: ^2.0.1  # Para el manejo de rutas
   flutter_native_splash: ^2.0.5  # Para el splash screen
   cupertino_icons: ^1.0.8  # Iconos para iOS
+  flutter_slidable: ^3.0.0
 
 dev_dependencies:
   flutter_test:

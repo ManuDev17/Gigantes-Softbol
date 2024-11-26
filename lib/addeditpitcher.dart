@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:softbol/db/firestore_database.dart';
-import 'package:softbol/models/pitcher.dart';
+import 'package:softbol/models/pitcher.dart'; // Asegúrate de importar Pitcher
 
 class AddEditPitcher extends StatefulWidget {
   final Pitcher? pitcher;
@@ -198,15 +197,17 @@ class _AddEditPitcherState extends State<AddEditPitcher> {
                       Navigator.of(context).pop(true);
                     } catch (e) {
                       // Si hay algún error, imprime el error y muestra un mensaje
-                      print("Error al guardar pitcher: $e");
+                      print("Error al guardar: $e");
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Error al guardar jugador: $e')),
+                        const SnackBar(
+                          content: Text('Hubo un error al guardar los datos.'),
+                        ),
                       );
                     }
                   }
                 },
                 child: const Text('Guardar'),
-              )
+              ),
             ],
           ),
         ),
@@ -214,26 +215,25 @@ class _AddEditPitcherState extends State<AddEditPitcher> {
     );
   }
 
+  // Métodos de ayuda para construir campos de texto y número
   Widget _buildTextField(String label, String initialValue,
-      String? Function(String?) validator, void Function(String?) onSaved) {
+      String? Function(String?)? validator, Function(String?)? onSaved) {
     return TextFormField(
       initialValue: initialValue,
-      decoration: InputDecoration(
-          labelText: label, labelStyle: TextStyle(color: Colors.white)),
-      style: TextStyle(color: Colors.white),
+      decoration: InputDecoration(labelText: label, fillColor: Colors.white),
+      style: const TextStyle(color: Colors.white),
       validator: validator,
       onSaved: onSaved,
     );
   }
 
   Widget _buildNumberField(String label, int initialValue,
-      String? Function(String?) validator, void Function(String?) onSaved) {
+      String? Function(String?)? validator, Function(String?)? onSaved) {
     return TextFormField(
       initialValue: initialValue.toString(),
+      decoration: InputDecoration(labelText: label, fillColor: Colors.white),
+      style: const TextStyle(color: Colors.white),
       keyboardType: TextInputType.number,
-      decoration: InputDecoration(
-          labelText: label, labelStyle: TextStyle(color: Colors.white)),
-      style: TextStyle(color: Colors.white),
       validator: validator,
       onSaved: onSaved,
     );

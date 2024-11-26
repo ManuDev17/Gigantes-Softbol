@@ -23,6 +23,14 @@ class _PlayerDetailsState extends State<PlayerDetails> {
   late TextEditingController baseonballsController;
   late TextEditingController ponchesController;
   late TextEditingController anotadasController;
+  late TextEditingController juegosController;
+  late TextEditingController juegoscerradosController;
+  late TextEditingController inningsController;
+  late TextEditingController victoriasController;
+  late TextEditingController derrotasController;
+  late TextEditingController ponchesPController;
+  late TextEditingController baseporbolasController;
+  late TextEditingController carreraspermitidasController;
 
   // Instancia de FirestoreDatabase
   final FirestoreDatabase firestoreDatabase = FirestoreDatabase();
@@ -44,6 +52,22 @@ class _PlayerDetailsState extends State<PlayerDetails> {
         TextEditingController(text: widget.player.ponches.toString());
     anotadasController =
         TextEditingController(text: widget.player.anotadas.toString());
+    juegosController =
+        TextEditingController(text: widget.player.juegos.toString());
+    juegoscerradosController =
+        TextEditingController(text: widget.player.juegoscerrados.toString());
+    inningsController =
+        TextEditingController(text: widget.player.innings.toString());
+    victoriasController =
+        TextEditingController(text: widget.player.victorias.toString());
+    derrotasController =
+        TextEditingController(text: widget.player.derrotas.toString());
+    ponchesPController =
+        TextEditingController(text: widget.player.ponchesP.toString());
+    baseporbolasController =
+        TextEditingController(text: widget.player.baseporbolas.toString());
+    carreraspermitidasController = TextEditingController(
+        text: widget.player.carreraspermitidas.toString());
   }
 
   @override
@@ -57,6 +81,14 @@ class _PlayerDetailsState extends State<PlayerDetails> {
     baseonballsController.dispose();
     ponchesController.dispose();
     anotadasController.dispose();
+    juegosController.dispose();
+    juegoscerradosController.dispose();
+    inningsController.dispose();
+    victoriasController.dispose();
+    derrotasController.dispose();
+    ponchesPController.dispose();
+    baseporbolasController.dispose();
+    carreraspermitidasController.dispose();
     super.dispose();
   }
 
@@ -77,6 +109,19 @@ class _PlayerDetailsState extends State<PlayerDetails> {
       ponches: int.tryParse(ponchesController.text) ?? widget.player.ponches,
       anotadas: int.tryParse(anotadasController.text) ?? widget.player.anotadas,
       battingAverage: widget.player.battingAverage, // Incluye este campo
+      juegos: int.tryParse(juegosController.text) ?? widget.player.juegos,
+      juegoscerrados: int.tryParse(juegoscerradosController.text) ??
+          widget.player.juegoscerrados,
+      innings: int.tryParse(inningsController.text) ?? widget.player.innings,
+      victorias:
+          int.tryParse(victoriasController.text) ?? widget.player.victorias,
+      derrotas: int.tryParse(derrotasController.text) ?? widget.player.derrotas,
+      ponchesP: int.tryParse(ponchesPController.text) ?? widget.player.ponchesP,
+      baseporbolas: int.tryParse(baseporbolasController.text) ??
+          widget.player.baseporbolas,
+      carreraspermitidas: int.tryParse(carreraspermitidasController.text) ??
+          widget.player.carreraspermitidas,
+      efectividad: widget.player.efectividad,
     );
 
     // Asegúrate de que el ID del jugador no sea nulo
@@ -146,6 +191,47 @@ class _PlayerDetailsState extends State<PlayerDetails> {
               TextFormField(
                 controller: anotadasController,
                 decoration: InputDecoration(labelText: 'R (Carreras Anotadas)'),
+                keyboardType: TextInputType.number,
+              ),
+              TextFormField(
+                controller: juegosController,
+                decoration: InputDecoration(labelText: 'Juegos'),
+                keyboardType: TextInputType.number,
+              ),
+              TextFormField(
+                controller: juegoscerradosController,
+                decoration: InputDecoration(labelText: 'Juegos Cerrados'),
+                keyboardType: TextInputType.number,
+              ),
+              TextFormField(
+                controller: inningsController,
+                decoration: InputDecoration(labelText: 'Innings'),
+                keyboardType: TextInputType.number,
+              ),
+              TextFormField(
+                controller: victoriasController,
+                decoration: InputDecoration(labelText: 'Victorias'),
+                keyboardType: TextInputType.number,
+              ),
+              TextFormField(
+                controller: derrotasController,
+                decoration: InputDecoration(labelText: 'Derrotas'),
+                keyboardType: TextInputType.number,
+              ),
+              TextFormField(
+                controller: ponchesPController,
+                decoration: InputDecoration(labelText: 'Ponches (Pitcheo)'),
+                keyboardType: TextInputType.number,
+              ),
+              TextFormField(
+                controller: baseporbolasController,
+                decoration:
+                    InputDecoration(labelText: 'Base por bolas (Pitcheo)'),
+                keyboardType: TextInputType.number,
+              ),
+              TextFormField(
+                controller: carreraspermitidasController,
+                decoration: InputDecoration(labelText: 'Carreras Permitidas'),
                 keyboardType: TextInputType.number,
               ),
             ],

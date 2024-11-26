@@ -13,6 +13,15 @@ class Player {
   final int atBats;
   final int ponches;
   final int anotadas;
+  final int innings;
+  final double efectividad;
+  final int victorias;
+  final int derrotas;
+  final int juegos;
+  final int juegoscerrados;
+  final int carreraspermitidas;
+  final int baseporbolas;
+  final int ponchesP;
 
   Player({
     this.id,
@@ -27,6 +36,15 @@ class Player {
     required this.atBats,
     required this.ponches,
     required this.anotadas,
+    required this.innings,
+    required this.efectividad,
+    required this.victorias,
+    required this.derrotas,
+    required this.juegos,
+    required this.juegoscerrados,
+    required this.carreraspermitidas,
+    required this.baseporbolas,
+    required this.ponchesP,
   });
 
   // Método para crear un Player a partir de un documento Firestore
@@ -46,6 +64,15 @@ class Player {
       atBats: data['atBats'] ?? 0,
       ponches: data['ponches'] ?? 0,
       anotadas: data['anotadas'] ?? 0,
+      innings: data['innings'] ?? 0,
+      efectividad: data['efectividad'] ?? 0,
+      victorias: data['victorias'] ?? 0,
+      derrotas: data['derrotas'] ?? 0,
+      juegos: data['juegos'] ?? 0,
+      juegoscerrados: data['juegoscerrados'] ?? 0,
+      carreraspermitidas: data['carreraspermitidas'] ?? 0,
+      baseporbolas: data['baseporbolas'] ?? 0,
+      ponchesP: data['ponchesP'] ?? 0,
     );
   }
 
@@ -63,6 +90,15 @@ class Player {
       'atBats': atBats,
       'ponches': ponches,
       'anotadas': anotadas,
+      'innings': innings,
+      'efectividad': efectividad,
+      'victorias': victorias,
+      'derrotas': derrotas,
+      'juegos': juegos,
+      'juegoscerrados': juegoscerrados,
+      'carreraspermitidas': carreraspermitidas,
+      'baseporbolas': baseporbolas,
+      'ponchesP': ponchesP,
     };
   }
 
@@ -81,6 +117,15 @@ class Player {
       atBats: data['atBats'] ?? 0,
       ponches: data['ponches'] ?? 0,
       anotadas: data['anotadas'] ?? 0,
+      juegos: data['juegos'] ?? 0,
+      innings: data['innings'] ?? 0,
+      efectividad: data['efectividad']?.toDouble() ?? 0.0,
+      victorias: data['victorias'] ?? 0,
+      derrotas: data['derrotas'] ?? 0,
+      ponchesP: data['ponchesP'] ?? 0,
+      baseporbolas: data['baseporbolas'] ?? 0,
+      carreraspermitidas: data['carreraspermitidas'] ?? 0,
+      juegoscerrados: data['juegos cerrados'] ?? 0,
     );
   }
 }

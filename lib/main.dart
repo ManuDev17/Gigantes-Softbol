@@ -4,6 +4,7 @@ import 'firebase_options.dart'; // Archivo auto-generado de Firebase
 import 'home_page.dart';
 import 'calendar_page.dart';
 import 'standings_page.dart';
+//import 'calendariotorneodeplata2024.dart'; // Importa la nueva página
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +31,7 @@ class SoftballStatsApp extends StatelessWidget {
           color: Colors.black,
           titleTextStyle: TextStyle(
             color: Colors.white,
-            fontSize: 20,
+            fontSize: 30,
             fontFamily: 'GigantesFont',
           ),
         ),

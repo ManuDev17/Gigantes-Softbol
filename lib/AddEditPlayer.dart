@@ -24,6 +24,14 @@ class _AddEditPlayerState extends State<AddEditPlayer> {
   late int _baseonballs;
   late int _ponches;
   late int _anotadas;
+  late int _juegos;
+  late int _innings;
+  late int _victorias;
+  late int _derrotas;
+  late int _juegoscerrados;
+  late int _carreraspermitidas;
+  late int _baseporbolas;
+  late int _ponchesP;
 
   @override
   void initState() {
@@ -38,6 +46,14 @@ class _AddEditPlayerState extends State<AddEditPlayer> {
     _baseonballs = widget.player?.baseonballs ?? 0;
     _ponches = widget.player?.ponches ?? 0;
     _anotadas = widget.player?.anotadas ?? 0;
+    _juegos = widget.player?.juegos ?? 0;
+    _juegoscerrados = widget.player?.juegoscerrados ?? 0;
+    _innings = widget.player?.innings ?? 0;
+    _victorias = widget.player?.victorias ?? 0;
+    _derrotas = widget.player?.derrotas ?? 0;
+    _ponchesP = widget.player?.ponchesP ?? 0;
+    _baseporbolas = widget.player?.baseporbolas ?? 0;
+    _carreraspermitidas = widget.player?.carreraspermitidas ?? 0;
   }
 
   @override
@@ -135,6 +151,72 @@ class _AddEditPlayerState extends State<AddEditPlayer> {
               }, (value) {
                 _anotadas = int.parse(value!);
               }),
+              _buildNumberField('Juegos', _juegos, (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Ingrese Juegos';
+                }
+                return null;
+              }, (value) {
+                _juegos = int.parse(value!);
+              }),
+              _buildNumberField('Juegos cerrados', _juegoscerrados, (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Ingrese los juegos cerrados';
+                }
+                return null;
+              }, (value) {
+                _juegoscerrados = int.parse(value!);
+              }),
+              _buildNumberField('Innings', _innings, (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Ingrese Innings';
+                }
+                return null;
+              }, (value) {
+                _innings = int.parse(value!);
+              }),
+              _buildNumberField('Victorias', _victorias, (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Ingrese victorias';
+                }
+                return null;
+              }, (value) {
+                _victorias = int.parse(value!);
+              }),
+              _buildNumberField('Derrotas', _derrotas, (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Ingrese derrotas';
+                }
+                return null;
+              }, (value) {
+                _derrotas = int.parse(value!);
+              }),
+              _buildNumberField('Ponches (Pitcheo)', _ponchesP, (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Ingrese ponches';
+                }
+                return null;
+              }, (value) {
+                _ponchesP = int.parse(value!);
+              }),
+              _buildNumberField('Base por Bolas (Pitcheo)', _baseporbolas,
+                  (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Ingrese base por bolas';
+                }
+                return null;
+              }, (value) {
+                _baseporbolas = int.parse(value!);
+              }),
+              _buildNumberField('Carreras Permitidas', _carreraspermitidas,
+                  (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Carreras permitidas';
+                }
+                return null;
+              }, (value) {
+                _carreraspermitidas = int.parse(value!);
+              }),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
@@ -144,6 +226,10 @@ class _AddEditPlayerState extends State<AddEditPlayer> {
                     // Calcula el promedio de bateo, evitando la división por cero
                     double battingAverage =
                         (_atBats > 0) ? _hits / _atBats : 0.0;
+
+                    double efectividad = (_innings > 0)
+                        ? (_carreraspermitidas / _innings) * 7
+                        : 0.0;
 
                     // Crea el objeto jugador con los datos ingresados
                     final player = Player(
@@ -158,8 +244,17 @@ class _AddEditPlayerState extends State<AddEditPlayer> {
                       baseonballs: _baseonballs,
                       ponches: _ponches,
                       anotadas: _anotadas,
-                      battingAverage:
-                          battingAverage, // Agrega el promedio de bateo
+                      battingAverage: battingAverage,
+                      efectividad: efectividad,
+                      juegos: _juegos,
+                      victorias: _victorias,
+                      derrotas: _derrotas,
+                      baseporbolas: _baseporbolas,
+                      carreraspermitidas: _carreraspermitidas,
+                      ponchesP: _ponchesP,
+                      innings: _innings,
+                      juegoscerrados:
+                          _juegoscerrados, // Agrega el promedio de bateo
                     );
 
                     // Convierte los datos a un formato adecuado para Firestore
@@ -174,8 +269,16 @@ class _AddEditPlayerState extends State<AddEditPlayer> {
                       'baseonballs': player.baseonballs,
                       'ponches': player.ponches,
                       'anotadas': player.anotadas,
-                      'battingAverage':
-                          player.battingAverage, // Agrega el promedio de bateo
+                      'battingAverage': player.battingAverage,
+                      'efectividad': player.efectividad,
+                      'juegos': player.juegos,
+                      'victorias': player.victorias,
+                      'derrotas': player.derrotas,
+                      'baseporbolas': player.baseporbolas,
+                      'carreraspermitidas': player.carreraspermitidas,
+                      'ponchesP': player.ponchesP,
+                      'innings': player.innings,
+                      'juegos cerrados': player.juegoscerrados,
                     };
 
                     // Verifica si es una actualización o una creación nueva

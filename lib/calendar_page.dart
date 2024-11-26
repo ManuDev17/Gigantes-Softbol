@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:softbol/calendariotorneodeplata2024.dart';
+//import 'package:softbol/calendariotorneodeplata2024.dart';
+// Importa la nueva página
 
 class CalendarPage extends StatelessWidget {
   @override
@@ -15,6 +18,19 @@ class CalendarPage extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Calendariotorneodeplata2024(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: Stack(
         children: [

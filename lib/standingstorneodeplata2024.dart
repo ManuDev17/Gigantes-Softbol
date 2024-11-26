@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:softbol/standingstorneodeplata2024.dart';
 
-class StandingsPage extends StatelessWidget {
+class Standingstorneodeplata2024 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Center(
           child: Text(
-            'Tabla de Posiciones LISU 2024',
+            'Tabla de Posiciones Torneo de Plata 2024',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -16,19 +15,6 @@ class StandingsPage extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Standingstorneodeplata2024(),
-                ),
-              );
-            },
-          ),
-        ],
       ),
       body: Stack(
         children: [
@@ -52,28 +38,16 @@ class StandingsPage extends StatelessWidget {
                   SizedBox(height: 10),
                   // Filas de equipos
                   _buildTeamRow(
-                      'Carboneros', 7, 6, 1, 62, 23, 39, 0.0, .857, 8.8, 3.2),
+                      'Texas', 2, 2, 0, 19, 13, 6, 0.0, 1.000, 9.5, 6.5),
                   SizedBox(height: 8),
                   _buildTeamRow(
-                      'Repecho', 7, 6, 1, 70, 33, 37, 0.0, 0.857, 10, 4.7),
+                      'Vegueros', 2, 1, 1, 19, 13, 6, 1.0, 0.500, 9.5, 6.5),
                   SizedBox(height: 8),
                   _buildTeamRow(
-                      'Pa Goza', 7, 6, 1, 68, 32, 36, 0.0, 0.857, 9.7, 4.5),
+                      'Gigantes', 2, 1, 1, 24, 26, -2, 1.0, 0.500, 12.0, 13.0),
                   SizedBox(height: 8),
                   _buildTeamRow(
-                      'Cerveceros', 7, 3, 4, 39, 40, -1, 3.0, 0.429, 5.5, 5.7),
-                  SizedBox(height: 8),
-                  _buildTeamRow(
-                      'Vegueros', 7, 3, 4, 50, 53, -3, 3.0, 0.429, 7.1, 7.5),
-                  SizedBox(height: 8),
-                  _buildTeamRow('Cuba Libre', 7, 2, 5, 54, 80, -26, 4.0, 0.286,
-                      7.7, 11.4),
-                  SizedBox(height: 8),
-                  _buildTeamRow(
-                      'Mets', 7, 1, 6, 19, 60, -41, 5.0, 0.143, 2.7, 8.5),
-                  SizedBox(height: 8),
-                  _buildTeamRow(
-                      'Gigantes', 7, 1, 6, 55, 96, -41, 5.0, 0.143, 7.8, 13.7),
+                      'La Costa', 2, 0, 2, 20, 30, -10, 2.0, 0.000, 10.0, 15.0),
                   SizedBox(
                       height:
                           16), // Añadir espacio extra después del último equipo

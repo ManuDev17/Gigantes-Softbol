@@ -66,21 +66,20 @@ class Pitcher {
     };
   }
 
-  // Método para crear un Player a partir de un Map y un ID
-  factory Pitcher.fromMap(Map<String, dynamic> data, String id) {
+  // Constructor para crear un objeto Pitcher desde un Map
+  factory Pitcher.fromMap(Map<String, dynamic> data) {
     return Pitcher(
-      id: id,
       name: data['name'] ?? '',
       number: data['number'] ?? 0,
+      juegos: data['juegos'] ?? 0,
       innings: data['innings'] ?? 0,
-      efectividad: data['efectividad'] ?? 0,
+      efectividad: data['efectividad']?.toDouble() ?? 0.0,
       victorias: data['victorias'] ?? 0,
       derrotas: data['derrotas'] ?? 0,
-      juegos: data['juegos'] ?? 0,
-      juegoscerrados: data['juegoscerrados'] ?? 0,
-      carreraspermitidas: data['carreraspermitidas'] ?? 0,
-      baseporbolas: data['baseporbolas'] ?? 0,
       ponches: data['ponches'] ?? 0,
+      baseporbolas: data['baseporbolas'] ?? 0,
+      carreraspermitidas: data['carreraspermitidas'] ?? 0,
+      juegoscerrados: data['juegos cerrados'] ?? 0,
     );
   }
 }

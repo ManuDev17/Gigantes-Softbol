@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // Importa Firestore
 import 'package:softbol/models/player.dart';
 import 'addeditplayer.dart'; // Pantalla para agregar/editar jugadores
-import 'torneo_de_plata_2024.dart'; // Importa la nueva pantalla
 
-class HomePage extends StatefulWidget {
+class TorneoDePlata2024 extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _TorneoDePlata2024State createState() => _TorneoDePlata2024State();
 }
 
-class _HomePageState extends State<HomePage> {
+class _TorneoDePlata2024State extends State<TorneoDePlata2024> {
   late Future<List<Player>> _players;
-  int _selectedIndex = 0; // Para controlar el BottomNavigationBar
   final String correctPassword = "0953"; // Define la contraseña aquí
 
   @override
@@ -132,26 +130,13 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Center(
           child: Text(
-            'Gigantes de Montevideo',
+            'Torneo de Plata 2024',
             style: TextStyle(
-              fontSize: 30,
+              fontSize: 40,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => TorneoDePlata2024(),
-                ),
-              );
-            },
-          ),
-        ],
       ),
       body: Stack(
         children: [
@@ -266,6 +251,28 @@ class _HomePageState extends State<HomePage> {
                                     style: TextStyle(color: Colors.white)),
                                 Text('R Carreras Anotadas: ${player.anotadas}',
                                     style: TextStyle(color: Colors.white)),
+                                Text('Juegos: ${player.juegos}',
+                                    style: TextStyle(color: Colors.white)),
+                                Text(
+                                    'Juegos Cerrados: ${player.juegoscerrados}',
+                                    style: TextStyle(color: Colors.white)),
+                                Text('Innings: ${player.innings}',
+                                    style: TextStyle(color: Colors.white)),
+                                Text('Victorias: ${player.victorias}',
+                                    style: TextStyle(color: Colors.white)),
+                                Text('Derrotas: ${player.derrotas}',
+                                    style: TextStyle(color: Colors.white)),
+                                Text('Ponches (Pitcher): ${player.ponchesP}',
+                                    style: TextStyle(color: Colors.white)),
+                                Text(
+                                    'Base por bolas (Pitcher): ${player.baseporbolas}',
+                                    style: TextStyle(color: Colors.white)),
+                                Text(
+                                    'Carreras Permitidas: ${player.carreraspermitidas}',
+                                    style: TextStyle(color: Colors.white)),
+                                Text(
+                                    'Efectividad: ${player.efectividad.toStringAsFixed(3)}',
+                                    style: TextStyle(color: Colors.white)),
                               ],
                             ),
                           ),
@@ -300,42 +307,6 @@ class _HomePageState extends State<HomePage> {
           }
         },
         child: Icon(Icons.add),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white70,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: 'Calendario',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Posiciones',
-          ),
-        ],
-        currentIndex: _selectedIndex, // Usa el índice seleccionado
-        onTap: (int index) {
-          if (index != _selectedIndex) {
-            setState(() {
-              _selectedIndex = index;
-            });
-
-            // Navegar a las diferentes pantallas según el índice
-            if (_selectedIndex == 1) {
-              Navigator.popAndPushNamed(
-                  context, '/calendar'); // Ir a Calendario
-            } else if (_selectedIndex == 2) {
-              Navigator.popAndPushNamed(
-                  context, '/standings'); // Ir a Posiciones
-            }
-          }
-        },
       ),
     );
   }
