@@ -46,12 +46,20 @@ class Calendariotorneodeplata2024 extends StatelessWidget {
                 },
               ),
               _buildMatch(
-                '24 de Noviembre 12:00pm, Estadio Charrua',
                 'Gigantes de Montevideo vs Vegueros',
+                '24 de Noviembre 12:00pm, Estadio Charrua',
               ),
-              _buildMatch(
-                '1 de Diciembre 3:00pm, Estadio Charrua',
+              _buildMatchWithBoxScore(
                 'Gigantes de Montevideo vs Texas',
+                '8 de Diciembre 3:00 pm, Estadio Charrua',
+                'Resultado Gigantes 15 - Texas 7 , Gigantes fue visitante',
+                {
+                  '1er inning': '0 carreras Gigantes, 4 carreras Texas',
+                  '2do inning': '8 carreras Gigantes, 3 carreras Texas',
+                  '3er inning': '7 carreras Gigantes, 0 carreras Texas',
+                  '4to inning': '0 carreras Gigantes, 0 carreras Texas',
+                  '5to inning': '0 carreras Gigantes, 0 carreras Texas',
+                },
               ),
             ],
           ),

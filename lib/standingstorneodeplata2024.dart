@@ -38,16 +38,16 @@ class Standingstorneodeplata2024 extends StatelessWidget {
                   SizedBox(height: 10),
                   // Filas de equipos
                   _buildTeamRow(
-                      'Texas', 2, 2, 0, 19, 13, 6, 0.0, 1.000, 9.5, 6.5),
+                      'Vegueros', 3, 2, 1, 29, 15, 14, 0.0, 0.667, 9.7, 5.0),
                   SizedBox(height: 8),
                   _buildTeamRow(
-                      'Vegueros', 2, 1, 1, 19, 13, 6, 1.0, 0.500, 9.5, 6.5),
+                      'Gigantes', 3, 2, 1, 38, 33, 5, 0.0, 0.667, 12.7, 11.0),
                   SizedBox(height: 8),
                   _buildTeamRow(
-                      'Gigantes', 2, 1, 1, 24, 26, -2, 1.0, 0.500, 12.0, 13.0),
+                      'Texas', 3, 2, 1, 26, 27, -1, 0.0, 0.667, 8.7, 9.0),
                   SizedBox(height: 8),
                   _buildTeamRow(
-                      'La Costa', 2, 0, 2, 20, 30, -10, 2.0, 0.000, 10.0, 15.0),
+                      'La Costa', 3, 0, 3, 22, 40, -18, 2.0, 0.000, 7.3, 13.3),
                   SizedBox(
                       height:
                           16), // Añadir espacio extra después del último equipo
