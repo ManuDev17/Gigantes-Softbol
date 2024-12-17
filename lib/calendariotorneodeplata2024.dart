@@ -61,6 +61,23 @@ class Calendariotorneodeplata2024 extends StatelessWidget {
                   '5to inning': '0 carreras Gigantes, 0 carreras Texas',
                 },
               ),
+              _buildMatchWithBoxScore(
+                'Gigantes de Montevideo vs Cuba Libre',
+                '15 de Diciembre 12:00 pm, Estadio Charrua (Semifinal)',
+                'Resultado Cuba Libre 14 - Gigantes 6 , Gigantes fue local',
+                {
+                  '1er inning': '3 carreras Gigantes, 0 carreras Cuba Libre',
+                  '2do inning': '0 carreras Gigantes, 4 carreras Cuba Libre',
+                  '3er inning': '0 carreras Gigantes, 5 carreras Cuba Libre',
+                  '4to inning': '0 carreras Gigantes, 3 carreras Cuba Libre',
+                  '5to inning': '3 carreras Gigantes, 0 carreras Cuba Libre',
+                  '6to inning': '0 carreras Gigantes, 2 carreras Cuba Libre',
+                },
+              ),
+              _buildMatch(
+                'Gigantes de Montevideo vs Arizona (Partido por el 3er lugar)',
+                '22 de Diciembre 10:00 am, Estadio Charrua',
+              ),
             ],
           ),
         ],
