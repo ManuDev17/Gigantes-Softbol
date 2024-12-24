@@ -33,7 +33,7 @@ class Calendariotorneodeplata2024 extends StatelessWidget {
               // Partidos con Box Score
               _buildMatchWithBoxScore(
                 'Gigantes de Montevideo vs La Costa',
-                '17 de Noviembre 2:00 pm, Estadio Charrua',
+                '17 de Noviembre 2.00 pm, Estadio Charrua',
                 'Resultado Gigantes 23 - La Costa 15 , Gigantes fue visitante',
                 {
                   '1er inning': '2 carreras Gigantes, 0 carreras La Costa',
@@ -47,11 +47,11 @@ class Calendariotorneodeplata2024 extends StatelessWidget {
               ),
               _buildMatch(
                 'Gigantes de Montevideo vs Vegueros',
-                '24 de Noviembre 12:00pm, Estadio Charrua',
+                '24 de Noviembre 12.00pm, Estadio Charrua',
               ),
               _buildMatchWithBoxScore(
                 'Gigantes de Montevideo vs Texas',
-                '8 de Diciembre 3:00 pm, Estadio Charrua',
+                '8 de Diciembre 3.00 pm, Estadio Charrua',
                 'Resultado Gigantes 15 - Texas 7 , Gigantes fue visitante',
                 {
                   '1er inning': '0 carreras Gigantes, 4 carreras Texas',
@@ -63,7 +63,7 @@ class Calendariotorneodeplata2024 extends StatelessWidget {
               ),
               _buildMatchWithBoxScore(
                 'Gigantes de Montevideo vs Cuba Libre',
-                '15 de Diciembre 12:00 pm, Estadio Charrua (Semifinal)',
+                '15 de Diciembre 12.00 pm, Estadio Charrua (Semifinal)',
                 'Resultado Cuba Libre 14 - Gigantes 6 , Gigantes fue local',
                 {
                   '1er inning': '3 carreras Gigantes, 0 carreras Cuba Libre',
@@ -74,9 +74,17 @@ class Calendariotorneodeplata2024 extends StatelessWidget {
                   '6to inning': '0 carreras Gigantes, 2 carreras Cuba Libre',
                 },
               ),
-              _buildMatch(
-                'Gigantes de Montevideo vs Arizona (Partido por el 3er lugar)',
-                '22 de Diciembre 10:00 am, Estadio Charrua',
+              _buildMatchWithBoxScore(
+                'Gigantes de Montevideo vs Arizona',
+                '22 de Diciembre 10.00 am, Estadio Charrua (Partido por el 3er lugar)',
+                'Resultado Arizona 7 - Gigantes 15 , Gigantes fue local',
+                {
+                  '1er inning': '0 carreras Gigantes, 0 carreras Arizona',
+                  '2do inning': '2 carreras Gigantes, 0 carreras Arizona',
+                  '3er inning': '3 carreras Gigantes, 4 carreras Arizona',
+                  '4to inning': '5 carreras Gigantes, 1 carrera Arizona',
+                  '5to inning': '4 carreras Gigantes, 2 carreras Arizona',
+                },
               ),
             ],
           ),
